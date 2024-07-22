@@ -39,7 +39,6 @@ const Shop = () => {
   <section className='flex flex-col items-center justify-center'>
       <Header />
       <main className='py-[70px] h-[100vh] flex flex-col items-center justify-start'>
-        <h1 className='text-5xl capitalize text-center font-bold'>Featured products</h1>
         <aside className='flex gap-11 items-center justify-center p-[30px] mt-10'>
           {
             productDetails.map((productdetail, index) => (
