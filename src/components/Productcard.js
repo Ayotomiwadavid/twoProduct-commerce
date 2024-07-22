@@ -10,7 +10,7 @@ const Productcard = ({productTitle, productPrice, productImage}) => {
       </div>
       <div className="w-full flex px-3 justify-between items-center py-5">
         <h6 className="font-bold font-serif text-lg">{productTitle}</h6>
-        <div className="border-[1px] border-[#000] rounded-sm flex items-center justify-center w-fit px-1 h-[30px]">
+        <div className="rounded-sm flex items-center justify-center w-fit px-1">
           <p className="font-bold text-md capitalize text-center">{productPrice}</p>
         </div>
       </div>
