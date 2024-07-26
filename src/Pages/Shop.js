@@ -36,10 +36,10 @@ const Shop = () => {
   return (
     <>
 {   !overVisibility ? <Overlay /> :
-  <section className='flex flex-col items-center justify-center'>
+  <section className='flex flex-col items-center gap-5 justify-center'>
       <Header />
-      <main className='py-[70px] h-[100vh] flex flex-col items-center justify-start'>
-        <aside className='flex gap-11 items-center justify-center p-[30px] mt-10'>
+      <main className='md:py-[70px] py-[30px] md:h-[100vh] flex flex-col items-center justify-start'>
+        <aside className='flex flex-col gap-11 items-center justify-center p-[30px] mt-10 md:flex-row'>
           {
             productDetails.map((productdetail, index) => (
               <Productcard 
