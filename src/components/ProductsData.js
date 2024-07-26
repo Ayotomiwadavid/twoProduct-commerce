@@ -5,11 +5,12 @@ import firstP3 from '../Images/FirstP3.png'
 
 //SECOND PRODUCT IMAGE
 import secondProduct from '../Images/SecondProduct.png'
-import secondp2 from '../Images'
+import secondp2 from '../Images/SecondP2.png'
 import secondp3 from '../Images/SecondP3.png'
 
-const ProductData = [
+export const ProductData = [
     {
+        productId: 1,
         ProductTitle: 'Adopt-A-Gun Shirt',
         ProductImage:[
             FirstProductImage,
@@ -20,6 +21,7 @@ const ProductData = [
         ProductPrice: 42.00
     },
     {
+        productId: 2,
         ProductTitle: 'Northeast Division Shirt',
         ProductImage:[
             secondProduct,
@@ -30,5 +32,3 @@ const ProductData = [
         ProductPrice: 32.00
     }
 ];
-
-exports = ProductData;

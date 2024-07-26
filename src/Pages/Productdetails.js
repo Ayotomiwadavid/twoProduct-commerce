@@ -1,14 +1,15 @@
 import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import firstProduct from "../Images/FirstProduct.png"
-import secondProduct from '../Images/SecondProduct.png'
 
 const Productdetails = () => {
+  const {id} = useParams()
   return (
     <section className="w-full flex flex-col justify-center items-center">
       <Header />
+
       <main className="w-full flex flex-col gap-4 items-center justify-center px-[5vw]">
         <aside className="w-full flex py-5 items-center justify-start px-5">
           <Link to="/">
@@ -27,7 +28,6 @@ const Productdetails = () => {
                 </div>
             </div>
             <article className="flex flex-col items-start justify-center w-[55%] h-full">
-                
             </article>
         </aside>
       </main>
