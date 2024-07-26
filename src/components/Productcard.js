@@ -9,7 +9,7 @@ const Productcard = ({
 }) => {
   return (
     <>
-      <Link to={`/productDetails/:${productId}`}>
+      <Link to={`/productDetails/${productId}`}>
         <aside
           className="flex flex-col items-center justify-center gap-3 px-3 hover:shadow-lg cursor-pointer transition-all duration-500"
           id={productId}
