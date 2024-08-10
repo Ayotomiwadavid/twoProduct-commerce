@@ -91,8 +91,8 @@ const Productdetails = () => {
             </h2>
             <p className="font-serif text-left">{detailedProduct.ProductDescription}</p>
             <h1 className="tracking-wider w-full text-left text-xl py-3">{`$${detailedProduct.ProductPrice}.00`}</h1>
-            <div className="flex gap-5 items-center justify-start w-full">
-              <div className="flex items-center justify-between gap-2 bg-[#f5f5f5] px-4 h-[45px] w-[150px]">
+            <div className="flex gap-5 items-center md:justify-start justify-between w-full">
+              <div className="flex items-center justify-between gap-2 bg-[#f5f5f5] px-4 h-[45px] md:w-[150px]">
                 <button className="cursor-pointer px-3 font-bold text-lg" onClick={increaseQuantity}>+</button>
                 {quantity}
                 <button className="cursor-pointer px-3 font-bold text-lg" onClick={decreaseQuantity}>-</button>
