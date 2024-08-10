@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link, useParams } from "react-router-dom";
-import firstProduct from "../Images/FirstProduct.png";
 import { ProductData } from "../components/ProductsData";
 
 const Productdetails = () => {
@@ -54,10 +53,10 @@ const Productdetails = () => {
   }
 
   return (
-    <section className="w-full flex flex-col justify-center items-center">
+    <section className="w-full flex flex-col justify-center items-start">
       <Header />
       <main className="w-full flex flex-col items-center justify-center md:px-[5vw]">
-        <aside className="w-full flex py-5 items-center justify-start px-5">
+        <aside className="w-full flex py-2 mt-2 items-center justify-start px-5">
           <Link to="/">
             <button className="font-bold text-md py-1 px-2 md:text-lg font-serif outline-none border-[1px] border-[#000] md:py-2 md:px-4">
               Back
@@ -65,7 +64,7 @@ const Productdetails = () => {
           </Link>
         </aside>
         <article className="flex flex-col justify-center items-center gap-4 px-3 w-full md:my-3 md:justify-between md:flex-row">
-          <div className="flex flex-col w-full items-center justify-start md:justify-center gap-5 md:w-1/2 h-lvh">
+          <div className="flex flex-col w-full items-center justify-start py-12 gap-5 md:w-1/2 md:h-lvh">
             <div className="w-full flex items-center justify-center">
               <img
                 src={detailedProduct.ProductImage[imageIndex]}
@@ -86,12 +85,12 @@ const Productdetails = () => {
               ))}
             </div>
           </div>
-          <aside className="w-full gap-2 h-full md:py-10 flex flex-col items-center justify-center md:items-start md:justify-start md:w-1/2 md:px-10">
-            <h2 className="font-bold text-3xl capitalize font-serif my-4">
+          <aside className="w-full gap-2 md:py-10 flex flex-col items-center md:h-lvh justify-center md:items-start md:justify-start md:w-1/2 md:px-10">
+            <h2 className="font-bold text-2xl w-full capitalize font-serif my-4 md:text-3xl text-left">
               {detailedProduct.ProductTitle}
             </h2>
-            <p>{detailedProduct.ProductDescription}</p>
-            <h1 className="tracking-wider text-xl py-3">{`$${detailedProduct.ProductPrice}.00`}</h1>
+            <p className="font-serif text-left">{detailedProduct.ProductDescription}</p>
+            <h1 className="tracking-wider w-full text-left text-xl py-3">{`$${detailedProduct.ProductPrice}.00`}</h1>
             <div className="flex gap-5 items-center justify-start w-full">
               <div className="flex items-center justify-between gap-2 bg-[#f5f5f5] px-4 h-[45px] w-[150px]">
                 <button className="cursor-pointer px-3 font-bold text-lg" onClick={increaseQuantity}>+</button>
