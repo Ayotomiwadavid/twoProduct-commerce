@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link, useParams } from "react-router-dom";
@@ -14,6 +14,8 @@ const Productdetails = () => {
     (data) => data.productId.toString() === id
   );
 
+  const [total, setTotal] = useState(detailedProduct.ProductPrice * quantity)
+
 
   const increaseQuantity = () => {
     setQuantity(prevValue => prevValue + 1);
@@ -22,16 +24,75 @@ const Productdetails = () => {
   const decreaseQuantity = () => {
     setQuantity(prevValue => {
       if (prevValue !== 1) {
-       return prevValue - 1
+        return prevValue - 1
       } else {
         return prevValue = 1
       }
     });
   }
 
+  useEffect(() => {
+    setTotal(detailedProduct.ProductPrice * quantity);
+  }, [quantity, detailedProduct.ProductPrice]);
+
+  useEffect(() => {
+    console.log(total)
+  }, [total])
+
   const changeImage = (index) => {
     setImageIndex(index);
   }
+
+  const endPointUrl = 'https://techthoth-stripe-server.onrender.com/create-checkout-session';
+  const secretKey = 'sk_test_2IIZj9qvETFVO3EvJYJHAUQ100SCzRfnk5';
+
+  const requestBodyObject = {
+    stripeSecretKey: secretKey,
+    productPrice: total * 100,
+    productName: 'Lets create products Check out',
+    mode: 'payment',
+    paymentMethod: 'card',
+    successUrl: 'http://localhost:3000/thank-you',
+    cancelUrl: 'http://localhost:3000/',
+    quantity: 1,
+    currency: 'usd'
+  };
+
+  const options = {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(requestBodyObject)
+  };
+
+
+  const handlePayment = () => {
+    console.log('clicked');
+    let valid = true;
+
+    if (valid) {
+      fetch(endPointUrl, options)
+        .then(response => {
+          if (response.ok) {
+            return response.json();
+          }
+          return response.json().then(json => Promise.reject(json));
+        })
+        .then(data => {
+          console.log(data); // Log the full response data to inspect it
+          localStorage.setItem('sessionId', data.sessionId);
+          window.location = data.url
+        })
+        .catch(err => {
+          console.error('An Error Occurred:', err.message);
+        });
+    } else {
+      console.error('Fill All Your Shipping Details First');
+    }
+  };
+
+
 
   if (!detailedProduct) {
     return (
@@ -97,7 +158,7 @@ const Productdetails = () => {
                 {quantity}
                 <button className="cursor-pointer px-3 font-bold text-lg" onClick={decreaseQuantity}>-</button>
               </div>
-              <button className="capitalize h-[45px] flex justify-center items-center text-xl rounded-lg my-4 py-3 font-bold bg-black text-white px-4">
+              <button onClick={handlePayment} className="capitalize h-[45px] flex justify-center items-center text-xl rounded-lg my-4 py-3 font-bold bg-black text-white px-4">
                 Check out
               </button>
             </div>
