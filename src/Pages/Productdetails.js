@@ -1,20 +1,28 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { Link, useParams } from "react-router-dom";
 import { ProductData } from "../components/ProductsData";
+import { Context } from "../components/Provider";
 
 const Productdetails = () => {
   const { id } = useParams();
   const [quantity, setQuantity] = useState(1);
   const [imageIndex, setImageIndex] = useState(0);
 
+  const {total, setTotal} = useContext(Context)
+
   // Ensure the correct type comparison (string vs number)
   let detailedProduct = ProductData.find(
     (data) => data.productId.toString() === id
   );
 
-  const [total, setTotal] = useState(detailedProduct.ProductPrice * quantity)
+
+  useEffect(() => {
+    setTotal(() => detailedProduct.ProductPrice * quantity )
+  }, [])
+
+  console.log(total);
 
 
   const increaseQuantity = () => {
@@ -42,56 +50,6 @@ const Productdetails = () => {
   const changeImage = (index) => {
     setImageIndex(index);
   }
-
-  const endPointUrl = 'https://techthoth-stripe-server.onrender.com/create-checkout-session';
-  const secretKey = 'sk_test_2IIZj9qvETFVO3EvJYJHAUQ100SCzRfnk5';
-
-  const requestBodyObject = {
-    stripeSecretKey: secretKey,
-    productPrice: total * 100,
-    productName: 'Lets create products Check out',
-    mode: 'payment',
-    paymentMethod: 'card',
-    successUrl: 'http://localhost:3000/thank-you',
-    cancelUrl: 'http://localhost:3000/',
-    quantity: 1,
-    currency: 'usd'
-  };
-
-  const options = {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(requestBodyObject)
-  };
-
-
-  const handlePayment = (e) => {
-    e.preventDefault();
-    console.log('clicked');
-    let valid = true;
-
-    if (valid) {
-      fetch(endPointUrl, options)
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          }
-          return response.json().then(json => Promise.reject(json));
-        })
-        .then(data => {
-          console.log(data); // Log the full response data to inspect it
-          localStorage.setItem('sessionId', data.sessionId);
-          window.location = data.url
-        })
-        .catch(err => {
-          console.error('An Error Occurred:', err.message);
-        });
-    } else {
-      console.error('Fill All Your Shipping Details First');
-    }
-  };
 
 
   if (!detailedProduct) {
