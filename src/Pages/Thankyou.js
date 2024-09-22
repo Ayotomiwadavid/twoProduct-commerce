@@ -45,7 +45,6 @@ const Thankyou = () => {
   const alertPaymentStatus = async () => {
     try {
       const status = await checkPaymentStatus();
-      console.log(status);
 
       if (status === 'paid') {
         toast.success('Payment confirmed');
